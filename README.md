@@ -2,6 +2,7 @@
 Membuat REST API sederhana menggunakan Express JS
 
 ## API Endoint 
+```
 +-----------------------------------+------------+--------+
 | Operasi                           | API Route  | Method |
 +-----------------------------------+------------+--------+
@@ -15,6 +16,7 @@ Membuat REST API sederhana menggunakan Express JS
 +-----------------------------------+------------+--------+
 | Menghapus artikel berdasarkan ID  | /posts/{id}| DELETE |
 +-----------------------------------+------------+--------+
+```
 
 ## Yang dibutuhkan:
 
