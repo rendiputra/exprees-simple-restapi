@@ -9,15 +9,15 @@ Membuat REST API sederhana menggunakan Express JS
 
 ## Cara Instalasi
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
  
 
 ## Cara Menjalankan Aplikasi
 
-    ```bash
-    npm run server
-    ```
+```bash
+npm run server
+```
 
 Buka alamat [localhost:3000](http://localhost:3000)  pada browser untuk melihat hasilnya.
