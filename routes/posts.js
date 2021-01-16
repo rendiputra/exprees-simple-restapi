@@ -76,9 +76,42 @@ router.get('/:id',async function(req, res, next) {
 
 /**
  * Route untuk membuat artikel baru
+ * Endpoint (POST): http://localhost:3000/posts
  */
-router.post('/', function(req, res, next) {
-	  
+router.post('/', async function(req, res, next) {
+	  try {
+      //menerima form data yang dikirim melalu request body
+      const {
+        title,
+        content,
+        tags,
+        published
+      } = req.body;
+
+      // membuat data baru di database menggunakan method create()
+      const post = await models.posts.create({
+        title,
+        content,
+        tags,
+        published
+      });
+
+      // jika data berhasil dibuat, maka akan mengembalikan rensponse dengan kode 201 dan status OK
+      if(post){
+        res.status(201).json({
+          'status': 'OK',
+          'messages': 'Success | Post berhasil ditambahkan',
+          'data': post
+        });
+      }
+      
+    // apabila terjadi error
+    }catch(err) {
+      res.status(400).json({
+        'status': 'ERROR',
+        'messages': err.messages
+      });
+    }
 });
 
 /**
