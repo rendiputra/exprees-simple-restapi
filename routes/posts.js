@@ -80,7 +80,7 @@ router.get('/:id',async function(req, res, next) {
  */
 router.post('/', async function(req, res, next) {
 	  try {
-      //menerima form data yang dikirim melalu request body
+      // menerima form data yang dikirim melalu request body
       const {
         title,
         content,
@@ -116,16 +116,73 @@ router.post('/', async function(req, res, next) {
 
 /**
  * Route untuk mengupdate artikel berdasarkan ID
+ * Endpoint (PUT): http://localhost:3000/posts/{id}
  */
-router.put('/:id', function(req, res, next) {
-	  
+router.put('/:id', async function(req, res, next) {
+	  try {
+      
+      const id = req.params.id;
+      const {
+        title,
+        content,
+        tags,
+        published
+      } = req.body;
+
+      const update = models.posts.update({
+        title,
+        content,
+        tags,
+        published
+      }, {
+        where: {
+          id: id
+        }
+      });
+
+      if(update){
+        res.json({
+          'status': 'OK',
+          'messages': 'Success | Post berhasil di update'
+        })
+      }
+      
+    } catch(err) {
+      res.status(400).json({
+        'status': 'ERROR',
+        'messages': err.messages
+      });
+    }
+
+
 });
 
 /**
  * Route untuk menghapus artikel berdasarkan ID
+ * Endpoint (DELETE): http://localhost:3000/posts/{id}
  */
 router.delete('/:id', function(req, res, next) {
-	  
+	  try{
+      const id = req.params.id;
+      const post = models.posts.destroy({
+        where: {
+          id: id
+        }
+      });
+
+      if(post) {
+        res.json({
+          'status': 'OK',
+          'messages': 'Success | Post berhasil dihapus'
+        });
+      }
+      
+    } catch(err){
+      res.status(400).json({
+        'status': 'ERROR',
+        'messages': err.messages
+      });
+    }
 });
 
 export default router;
